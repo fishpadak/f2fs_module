@@ -2213,6 +2213,8 @@ static int f2fs_ioc_forward_sync(struct file *filp, unsigned long arg)
 	struct blk_plug plug;
 	int ret, err;
 
+	printk(KERN_INFO "DYLee: f2fs_ioc_forward_sync triggered\n");
+
 //	if (!capable(CAP_SYS_ADMIN))
 //		return -EPERM;
 
@@ -2233,6 +2235,7 @@ static int f2fs_ioc_forward_sync(struct file *filp, unsigned long arg)
 
 	/* flush direct node blocks with ending fsync_mark */
 	err = sync_node_pages(sbi, &wbc, 2);
+	printk(KERN_INFO "DYLee: f2fs_ioc_forward_sync end normally\n");
 out:
 	blk_finish_plug(&plug);
 	mnt_drop_write_file(filp);
